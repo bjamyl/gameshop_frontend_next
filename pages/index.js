@@ -1,6 +1,24 @@
-import Head from "next/head";
-import Image from "next/image";
+import HeroBanner from "../components/Homepage/Banner/HeroBanner";
+import Products from "../components/Homepage/Products/Products";
+import Layout from "../components/Layout";
+import Featured from "../components/Homepage/Featured/Featured";
+export default function Home({products}) {
+  return (
+    <Layout>
+      <div className="">
+        <HeroBanner />
+        <Products products={products} />
+        <Featured/>
+      </div>
+    </Layout>
+  );
+}
 
-export default function Home() {
-  return <h1 className="text-5xl font-bold">Is this working?</h1>;
+export async function getServerSideProps() {
+  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const products = await res.json();
+
+  return {
+    props: { products },
+  };
 }
