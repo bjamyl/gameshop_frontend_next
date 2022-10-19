@@ -1,21 +1,12 @@
 import Image from "next/image";
 import Layout from "../../components/Layout";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useStateContext } from "../../context/StateContext";
+import Cart from "../../components/Cart";
+
 export default function Product({ product }) {
-  console.log(product);
   const orig = "http://127.0.0.1:8000";
-  const options = [
-    { id: 1, number: 1 },
-    { id: 2, number: 2 },
-    { id: 3, number: 3 },
-    { id: 4, number: 4 },
-    { id: 5, number: 5 },
-    { id: 6, number: 6 },
-    { id: 7, number: 7 },
-    { id: 8, number: 8 },
-    { id: 9, number: 9 },
-    { id: 10, number: 10 },
-  ];
+  const { decQty, incQty, qty, onAdd } = useStateContext();
 
   return (
     <Layout>
@@ -48,23 +39,20 @@ export default function Product({ product }) {
                 <AiOutlineStar />
               </div>
               <p>{product.description}</p>
+              <div className="flex items-center gap-2 py-2">
+                <h3 className="font-bold">Quantity:</h3>
+                <div className="flex items-center">
+                  <button onClick={decQty} className="border px-4 py-1">-</button>
+                  <p className="px-4">{qty}</p>
+                  <button onClick={incQty} className="border px-4 py-1">+</button>
+                </div>
+              </div>
               <div className="flex gap-4 items-center">
-                <form action="">
-                  <div>
-                    <label className="font-bold xl:text-lg" htmlFor="">
-                      Quantity
-                    </label>
-                    <select className="px-2 py-1 xl:text-lg" name="" id="">
-                      {options.map((choice) => (
-                        <option key={choice.id} value={choice.number}>
-                          {choice.number}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </form>
-                <button className="bg-blue-500 px-2 py-1 text-white xl:text-lg">
+                <button onClick={()=> onAdd(product, qty)} className="bg-blue-500 px-6 py-1 text-white xl:text-lg">
                   Add to Cart
+                </button>
+                <button className="border px-6 py-1 text-blue-500 xl:text-lg">
+                  Buy Now
                 </button>
               </div>
             </div>
