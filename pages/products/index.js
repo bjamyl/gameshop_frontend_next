@@ -6,8 +6,8 @@ export default function Products({ products }) {
   console.log(products);
   return (
     <Layout title="GameShop | All Products">
-      <section>
-        <div className="space-y-8 md:space-y-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4">
+      <section className="xl:mx-48">
+        <div className="space-y-8 md:space-y-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 xl:gap-8">
           {products.map((product) => (
             <Link key={product.id} href={`products/${product.id}`}>
               <a>

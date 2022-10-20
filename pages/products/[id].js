@@ -9,7 +9,7 @@ export default function Product({ product }) {
   const { decQty, incQty, qty, onAdd } = useStateContext();
 
   return (
-    <Layout>
+    <Layout title={`GameShop | ${product.name}`}>
       <section className="xl:flex justify-center xl:mt-8">
         <div className="mx-4 xl:w-[1290px]">
           <div className="grid gap-4 lg:gap-6 xl:gap-8 grid-cols-1 md:grid-cols-2">

@@ -32,7 +32,9 @@ export default function Navbar() {
             </button>
           </div>
           <ul className="hidden md:flex gap-8 font-semibold xl:text-lg">
-            <li>Home</li>
+            <Link href="/products">
+              <li>All Products</li>
+            </Link>
             <li>Playstation</li>
             <li>Xbox</li>
             <li>PC and other accessories</li>
@@ -42,7 +44,9 @@ export default function Navbar() {
         <div className="hidden md:flex gap-4">
           <button className="relative" onClick={() => setShowCart(!showCart)}>
             <AiOutlineShopping size={30} />
-            <span className="bg-blue-600 font-bold absolute rounded-full w-6 h-6 flex items-center justify-center top-0 -right-3 text-white">{totalQuantity}</span>
+            <span className="bg-blue-600 font-bold absolute rounded-full w-6 h-6 flex items-center justify-center top-0 -right-3 text-white">
+              {totalQuantity}
+            </span>
           </button>
           <button className="px-2 py-1 border xl:text-lg text-blue-700 xl:px-4 xl:py-2">
             Sign Up

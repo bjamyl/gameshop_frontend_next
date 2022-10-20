@@ -19,7 +19,7 @@ export default function Cart() {
   const { totalPrice, totalQuantity, cartItems, showCart, setShowCart } =
     useStateContext();
 
-    console.log(cartItems)
+  console.log(cartItems);
 
   const handleClose = (e) => {
     if (e.target.id === "background") setShowCart(!showCart);
@@ -31,7 +31,7 @@ export default function Cart() {
       onClick={handleClose}
       className="fixed z-50 inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-end items-start"
     >
-      <div className="w-full flex flex-col justify-between border h-full md:w-[65%] lg:w-[55%] xl:w-[45%] bg-white">
+      <div className="w-full flex flex-col border h-full md:w-[65%] lg:w-[55%] xl:w-[45%] bg-white">
         <div className="m-4 flex justify-between items-center">
           <h3 className="font-bold text-xl xl:text-2xl">Shopping Cart</h3>
           <h3 className="text-blue-700">{totalQuantity} items</h3>
@@ -45,25 +45,51 @@ export default function Cart() {
         )}
         {/* If there are items in the cart */}
 
-        <div id="products container" className="">
+        <div id="products container" className="flex flex-col gap-4 overflow-y-auto">
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
-              <div key={item.id}>
-                <Image
-                  alt="cart-item-image"
-                  src={orig+item.image}
-                  width={50}
-                  height={50}
-                  layout="responsive"
-                  objectFit="cover"
-                />
+              <div className="flex rounded-xl xl:justify-items-stretch items-center mx-2 border-b-2" key={item.id}>
+                <div className="w-[25%] xl:w-[14%] mr-4">
+                  <Image
+                    alt="cart-item-image"
+                    src={orig + item.image}
+                    width={20}
+                    height={20}
+                    layout="responsive"
+                    objectFit="contain"
+                    className="rounded-xl xl:w-[80%] bg-slate-200"
+
+                  />
+                </div>
+                <div className="flex xl:w-[80%] xl:flex-row xl:justify-between flex-col gap-4">
+                  <div className="items-center xl:justify-between xl:w-[70%] flex">
+                    <h4 className="font-bold">{item.name}</h4>
+                    <div>
+                      <div className="flex items-center">
+                        <button onClick="" className="border px-4 py-1">
+                          -
+                        </button>
+                        <p className="px-4">9</p>
+                        <button onClick="" className="border px-4 py-1">
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className=" flex xl:gap-8 items-center justify-between">
+                    <h5 className="font-bold">${item.price}.00</h5>
+                    <button className="text-blue-700">
+                      <TiDeleteOutline size={30} />
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
         </div>
 
         {/* Bottom buttons section */}
         <div
-          className={`flex m-4 items-center ${
+          className={`flex p-4 w-[100%] items-center ${
             cartItems.length < 1 ? "justify-center" : "justify-between"
           }`}
         >
