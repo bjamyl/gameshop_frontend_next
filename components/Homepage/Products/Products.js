@@ -13,17 +13,9 @@ export default function Products({ products }) {
             These products are selling out fast! Get yours now!
           </p>
         </div>
-        <div className="space-y-8 md:space-y-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+        <div className=" gap-y-8 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-8">
           {products.map((product) => (
-            <Link key={product.id} href={`products/${product.id}`}>
-              <a>
-                <ProductCard
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                />
-              </a>
-            </Link>
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>

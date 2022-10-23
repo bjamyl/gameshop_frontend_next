@@ -5,7 +5,6 @@ import { useStateContext } from "../../context/StateContext";
 import Cart from "../../components/Cart";
 
 export default function Product({ product }) {
-  const orig = "http://127.0.0.1:8000";
   const { decQty, incQty, qty, onAdd } = useStateContext();
 
   return (
@@ -15,7 +14,7 @@ export default function Product({ product }) {
           <div className="grid gap-4 lg:gap-6 xl:gap-8 grid-cols-1 md:grid-cols-2">
             <div>
               <Image
-                src={orig + product.image}
+                src={product.image}
                 width={50}
                 height={50}
                 layout="responsive"

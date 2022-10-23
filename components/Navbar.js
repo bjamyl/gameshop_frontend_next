@@ -7,8 +7,8 @@ import Cart from "./Cart";
 export default function Navbar() {
   const { showCart, setShowCart, totalQuantity } = useStateContext();
   return (
-    <nav>
-      <div className="m-2 flex items-center justify-between xl:mx-8">
+    <nav className="fixed top-0 w-full bg-white border z-50">
+      <div className="m-2 flex items-center justify-between xl:mx-10 xl:my-4">
         {/* Logo */}
         <div>
           <Link href="/">
@@ -48,9 +48,9 @@ export default function Navbar() {
               {totalQuantity}
             </span>
           </button>
-          <button className="px-2 py-1 border xl:text-lg text-blue-700 xl:px-4 xl:py-2">
+          {/* <button className="px-2 py-1 border xl:text-lg text-blue-700 xl:px-4 xl:py-2">
             Sign Up
-          </button>
+          </button> */}
         </div>
         {showCart && <Cart />}
       </div>
