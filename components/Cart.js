@@ -1,13 +1,9 @@
 import React, { useRef } from "react";
+import { FaStripe } from "react-icons/fa";
 import { usePaystackPayment } from "react-paystack";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiOutlineLeft,
-  AiOutlineShopping,
-} from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineShopping } from "react-icons/ai";
 import Image from "next/image";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
@@ -24,29 +20,29 @@ export default function Cart() {
     setShowCart,
     onRemove,
   } = useStateContext();
+  const router = useRouter();
 
   const cartRef = useRef();
-  console.log('Total',totalPrice);
   const config = {
     reference: new Date().getTime().toString(),
     email: "user@example.com",
     currency: "GHS",
-    amount: totalPrice * 100,
+    amount: totalPrice * 100 * 14,
     publicKey: "pk_test_766ab4c20b6ba946429f6ec6ab47a57e3b0efeb0",
   };
   const onSuccess = (reference) => {
-    alert("Success");
-    console.log(reference);
+    toast.success('Payment Successful')
+    router.push("/confirmed");
+    setShowCart(!showCart);
   };
 
   const onClose = () => {
-    alert("Closed");
+    toast.error('Payment Canceled')
   };
 
   const initializePayment = usePaystackPayment(config);
 
   const handleCheckout = async () => {
-    alert("clicked");
     const stripe = await getStripe();
 
     const res = await fetch("/api/stripe", {
@@ -62,13 +58,12 @@ export default function Cart() {
     }
 
     const data = await res.json();
-    toast.loading("redirecting");
+    toast.loading("Redirecting to checkout");
 
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
   console.log(cartItems);
-
 
   console.log(cartItems);
 
@@ -76,16 +71,22 @@ export default function Cart() {
     if (e.target.id === "background") setShowCart(!showCart);
   };
 
-  const router = useRouter();
   return (
     <div
       id="background"
       onClick={handleClose}
-      className="fixed z-50 inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-end items-start"
+      className="fixed z-30 inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-end items-start"
     >
       <div className="w-full flex flex-col border h-full md:w-[65%] lg:w-[55%] xl:w-[38%] bg-white">
         <div className="m-4 flex justify-between items-center">
-          <h3 className="font-bold text-xl xl:text-2xl">Shopping Cart</h3>
+          <h3 className="font-bold text-xl flex items-center xl:text-2xl">
+            {cartItems.length < 1 && (
+              <button onClick={() => setShowCart(!showCart)}>
+                <AiOutlineLeft />
+              </button>
+            )}
+            Shopping Cart
+          </h3>
           <h3 className="text-blue-700">{totalQuantity} items</h3>
         </div>
         {/* If there are no items in the cart */}
@@ -104,13 +105,13 @@ export default function Cart() {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div
-                key={item.id}
+                key={item?.id}
                 className="flex rounded-full items-center mx-2 lg:mx-4 border-b-2 cursor-pointer"
               >
                 <div className="w-[25%] xl:w-[14%] mr-4">
                   <Image
                     alt="cart-item-image"
-                    src={item.image}
+                    src={item?.image}
                     width={20}
                     height={20}
                     layout="responsive"
@@ -122,7 +123,7 @@ export default function Cart() {
                   <div className="items-center justify-between xl:w-[70%] flex">
                     <h4 className="font-semibold w-2/4 h-12 scrollbar-hide overflow-scroll lg:h-auto lg:overflow-auto">
                       {" "}
-                      {item.name}
+                      {item?.name}
                     </h4>
                     <div>
                       <div className="flex items-center">
@@ -132,7 +133,7 @@ export default function Cart() {
                         >
                           -
                         </button>
-                        <p className="px-4">{item.quantity}</p>
+                        <p className="px-4">{item?.quantity}</p>
                         <button
                           onClick={() => toggleCartItemQuantity(item.id, "inc")}
                           className="border px-4 py-1"
@@ -143,7 +144,7 @@ export default function Cart() {
                     </div>
                   </div>
                   <div className=" flex xl:gap-8 items-center mr-2 justify-between">
-                    <h5 className="font-bold">${item.price}.00</h5>
+                    <h5 className="font-bold">${item?.price}.00</h5>
                     <button
                       onClick={() => onRemove(item)}
                       className="text-blue-700"

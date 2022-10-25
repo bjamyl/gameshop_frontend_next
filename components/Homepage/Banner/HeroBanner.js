@@ -1,8 +1,12 @@
 import BannerCard from "./BannerCard";
+import { useSpring, animated } from "react-spring";
 
 export default function HeroBanner() {
+
+const fade = useSpring({from:{opacity:0},to:{opacity:1}})
+
   return (
-    <header className="flex justify-center">
+    <animated.header style={fade} className="flex justify-center mt-9">
       <div className="bg-gradient-to-bl from-[#000428] to-[#004e92]">
         {/* Card for swiping */}
         <BannerCard
@@ -13,6 +17,6 @@ export default function HeroBanner() {
           image="/dualsense.png"
         />
       </div>
-    </header>
+    </animated.header>
   );
 }

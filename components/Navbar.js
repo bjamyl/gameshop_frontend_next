@@ -1,19 +1,20 @@
 import React from "react";
-import { AiOutlineMenu, AiOutlineShopping } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import Link from "next/link";
 import { useStateContext } from "../context/StateContext";
 import Cart from "./Cart";
+import Menu from "./Menu";
 
 export default function Navbar() {
-  const { showCart, setShowCart, totalQuantity } = useStateContext();
+  const { showCart, setShowCart, totalQuantity, showMenu, setShowMenu } =
+    useStateContext();
   return (
-    <nav className="fixed top-0 w-full bg-white border z-50">
+    <nav className="fixed top-0 w-full bg-slate-100 border z-50">
       <div className="m-2 flex items-center justify-between xl:mx-10 xl:my-4">
         {/* Logo */}
         <div>
           <Link href="/">
-            <h1 className="text-xl xl:text-2xl font-bold">
-              {" "}
+            <h1 className="text-xl xl:text-2xl text-gray-700 font-bold cursor-pointer">
               <span className="text-blue-500">Game</span>Shop
             </h1>
           </Link>
@@ -22,28 +23,45 @@ export default function Navbar() {
         <div>
           <div className=" flex gap-4 md:hidden">
             <button className="relative" onClick={() => setShowCart(true)}>
-              <AiOutlineShopping size={30} />
+              <AiOutlineShoppingCart size={30} />
               <span className="bg-blue-600 font-bold absolute -top-1 -right-2 text-white rounded-full w-6">
                 {totalQuantity}
               </span>
             </button>
-            <button>
+            <button onClick={() => setShowMenu(!showMenu)}>
               <AiOutlineMenu size={30} />
             </button>
           </div>
           <ul className="hidden md:flex gap-8 font-semibold xl:text-lg">
             <Link href="/products">
-              <li>All Products</li>
+              <li className="cursor-pointer transition-all duration-75 hover:border-b-2 border-blue-700">
+                All Products
+              </li>
             </Link>
-            <li>Playstation</li>
-            <li>Xbox</li>
-            <li>PC and other accessories</li>
+            <Link href="/playstation">
+              <li className="cursor-pointer transition-all duration-75 hover:border-b-2 border-blue-700">
+                PlayStation
+              </li>
+            </Link>
+            <Link href="xbox">
+              <li className="cursor-pointer transition-all duration-75 hover:border-b-2 border-blue-700">
+                Xbox
+              </li>
+            </Link>
+            <Link href="pc_and_others">
+              <li className="cursor-pointer transition-all duration-75 hover:border-b-2 border-blue-700">
+                PC and other accessories
+              </li>
+            </Link>
           </ul>
         </div>
         {/* Account buttons */}
         <div className="hidden md:flex gap-4">
-          <button className="relative" onClick={() => setShowCart(!showCart)}>
-            <AiOutlineShopping size={30} />
+          <button
+            className="relative  hover:-translate-y-1 transition-all duration-75"
+            onClick={() => setShowCart(!showCart)}
+          >
+            <AiOutlineShoppingCart size={30} />
             <span className="bg-blue-600 font-bold absolute rounded-full w-6 h-6 flex items-center justify-center top-0 -right-3 text-white">
               {totalQuantity}
             </span>
@@ -53,6 +71,7 @@ export default function Navbar() {
           </button> */}
         </div>
         {showCart && <Cart />}
+        {showMenu && <Menu />}
       </div>
     </nav>
   );

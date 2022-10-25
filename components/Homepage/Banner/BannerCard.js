@@ -11,7 +11,7 @@ export default function BannerCard({title, description, image}) {
         <p className="font-light xl:text-lg xl:w-2/3">
          {description}
         </p>
-        <button className="px-2 py-1 border xl:text-lg text-white xl:px-4 xl:py-2">
+        <button className="px-2 py-1 border xl:text-lg text-white xl:px-4 xl:py-2 hover:-translate-y-2 transition-all duration-75">
           Buy Now
         </button>
       </div>

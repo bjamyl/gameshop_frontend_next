@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useStateContext } from "../../../context/StateContext";
 
 export default function ProductCard({ product }) {
@@ -29,8 +30,11 @@ export default function ProductCard({ product }) {
       </Link>
       <button
         onClick={() => onAdd(product, currentQty)}
-        className="bg-blue-800 text-center text-white font-semibold py-3 w-[90%]"
+        className="bg-blue-800 flex items-center justify-center gap-3 text-white font-semibold py-3 w-[90%]"
       >
+        <p className="xl:text-2xl xl">
+          <AiOutlineShoppingCart />
+        </p>
         Add to Cart
       </button>
     </div>

@@ -5,6 +5,7 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -15,7 +16,7 @@ export const StateContext = ({ children }) => {
 
   //adding items to cart
   const onAdd = (product, quantity) => {
-    const checkProductInCart = cartItems.find((item) => item.id === product.id);
+    let checkProductInCart = cartItems.find((item) => item.id === product.id);
 
     setTotalPrice(
       (prevTotalPrice) => prevTotalPrice + product.price * quantity
@@ -23,13 +24,15 @@ export const StateContext = ({ children }) => {
     setTotalQuantity((prevTotalQuantity) => prevTotalQuantity + quantity);
     if (checkProductInCart) {
       const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct.id === product.id)
+        if (cartProduct?.id === product.id) {
           return {
             ...cartProduct,
             quantity: cartProduct.quantity + quantity,
           };
+        } else {
+          return cartProduct;
+        }
       });
-
       setCartItems(updatedCartItems);
     } else {
       product.quantity = quantity;
@@ -47,9 +50,11 @@ export const StateContext = ({ children }) => {
     setTotalPrice(
       (prevTotalPrice) =>
         prevTotalPrice - foundProduct.price * foundProduct.quantity
-    )
-    setTotalQuantity(prevTotalQuantity => prevTotalQuantity - foundProduct.quantity)
-    setCartItems(newCartItems)
+    );
+    setTotalQuantity(
+      (prevTotalQuantity) => prevTotalQuantity - foundProduct.quantity
+    );
+    setCartItems(newCartItems);
   };
 
   //Toggling Cart Item quantity
@@ -95,6 +100,9 @@ export const StateContext = ({ children }) => {
       value={{
         showCart,
         setShowCart,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantity,
         cartItems,
         totalPrice,
         totalQuantity,
@@ -104,6 +112,8 @@ export const StateContext = ({ children }) => {
         onAdd,
         toggleCartItemQuantity,
         onRemove,
+        showMenu,
+        setShowMenu
       }}
     >
       {children}
