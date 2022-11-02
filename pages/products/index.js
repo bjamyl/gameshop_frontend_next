@@ -3,7 +3,7 @@ import Link from "next/link";
 import ProductCard from "../../components/Homepage/Products/ProductCard";
 
 export default function Products({ products }) {
-  console.log(products);
+  // console.log(products);
   return (
     <Layout title="GameShop | All Products">
       <section className="bg-slate-100 px-4 xl:px-48 py-20">
@@ -17,7 +17,7 @@ export default function Products({ products }) {
   );
 }
 export async function getServerSideProps() {
-  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const res = await fetch("https://gameshop.up.railway.app/api/products/");
   const products = await res.json();
 
   return {

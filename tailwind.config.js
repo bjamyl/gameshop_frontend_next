@@ -9,7 +9,11 @@ module.exports = {
       backgroundImage: {
         'ps': "url('/links/ps.png')",
         'pc': "url('/links/pc.png')",
-        'xbox': "url('/links/xbox.jpg')"
+        'xbox': "url('/links/xbox.jpg')",
+        'gamedk': "url('/cover-desktop.jpg')",
+        'gamemb': "url('/cover-mobile.jpg')",
+        'cond': "url('/consoles-cover.jpg')",
+        'conm': "url('/console-mobile.jpg')",
       }
     },
   },

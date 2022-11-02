@@ -6,7 +6,7 @@ export default function Playstation({ products }) {
   const playstationProducts = products.filter((product) => {
     return product.category === "playstation";
   });
-  console.log(playstationProducts);
+  // console.log(playstationProducts);
   return (
     <Layout title="GameShop | Shop For Everything PlayStation">
       <section className="bg-slate-100">
@@ -23,7 +23,7 @@ export default function Playstation({ products }) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const res = await fetch("https://gameshop.up.railway.app/api/products/");
   const products = await res.json();
 
   return {

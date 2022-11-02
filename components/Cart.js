@@ -28,7 +28,7 @@ export default function Cart() {
     email: "user@example.com",
     currency: "GHS",
     amount: totalPrice * 100 * 14,
-    publicKey: "pk_test_766ab4c20b6ba946429f6ec6ab47a57e3b0efeb0",
+    publicKey: 'pk_test_766ab4c20b6ba946429f6ec6ab47a57e3b0efeb0',
   };
   const onSuccess = (reference) => {
     toast.success('Payment Successful')
@@ -54,7 +54,7 @@ export default function Cart() {
     });
 
     if (res.statusCode === 500) {
-      console.log("something happened");
+      // console.log("something happened");
     }
 
     const data = await res.json();
@@ -63,9 +63,9 @@ export default function Cart() {
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const handleClose = (e) => {
     if (e.target.id === "background") setShowCart(!showCart);

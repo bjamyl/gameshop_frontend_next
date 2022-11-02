@@ -69,7 +69,7 @@ export default function Product({ product }) {
 }
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const res = await fetch("https://gameshop.up.railway.app/api/products/");
   const data = await res.json();
 
   const paths = data.map((product) => {
@@ -86,7 +86,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
+  const res = await fetch(`https://gameshop.up.railway.app/api/products/${id}`);
   const data = await res.json();
 
   return {

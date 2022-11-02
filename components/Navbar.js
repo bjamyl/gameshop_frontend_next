@@ -1,12 +1,14 @@
 import React from "react";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
+import {RiSearchLine} from 'react-icons/ri'
 import Link from "next/link";
 import { useStateContext } from "../context/StateContext";
 import Cart from "./Cart";
 import Menu from "./Menu";
+import Search from "./Search";
 
 export default function Navbar() {
-  const { showCart, setShowCart, totalQuantity, showMenu, setShowMenu } =
+  const { showCart, setShowCart, totalQuantity, showMenu, setShowMenu, showSearch, setShowSearch } =
     useStateContext();
   return (
     <nav className="fixed top-0 w-full bg-slate-100 border z-50">
@@ -14,7 +16,7 @@ export default function Navbar() {
         {/* Logo */}
         <div>
           <Link href="/">
-            <h1 className="text-xl xl:text-2xl text-gray-700 font-bold cursor-pointer">
+            <h1 className="text-xl xl:text-3xl text-gray-700 font-bold cursor-pointer">
               <span className="text-blue-500">Game</span>Shop
             </h1>
           </Link>
@@ -22,6 +24,9 @@ export default function Navbar() {
         {/* Links or Menu */}
         <div>
           <div className=" flex gap-4 md:hidden">
+          <button onClick={()=> setShowSearch(!showSearch)} className=" hover:-translate-y-1 transition-all duration-75">
+            <RiSearchLine size={30}/>
+          </button>
             <button className="relative" onClick={() => setShowCart(true)}>
               <AiOutlineShoppingCart size={30} />
               <span className="bg-blue-600 font-bold absolute -top-1 -right-2 text-white rounded-full w-6">
@@ -57,6 +62,9 @@ export default function Navbar() {
         </div>
         {/* Account buttons */}
         <div className="hidden md:flex gap-4">
+          <button onClick={()=> setShowSearch(!showSearch)} className=" hover:-translate-y-1 transition-all duration-75">
+            <RiSearchLine size={30}/>
+          </button>
           <button
             className="relative  hover:-translate-y-1 transition-all duration-75"
             onClick={() => setShowCart(!showCart)}
@@ -72,6 +80,7 @@ export default function Navbar() {
         </div>
         {showCart && <Cart />}
         {showMenu && <Menu />}
+        {showSearch && <Search/>}
       </div>
     </nav>
   );

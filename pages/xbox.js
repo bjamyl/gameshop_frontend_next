@@ -7,7 +7,7 @@ export default function Xbox({products}) {
     return product.category === 'xbox'
   })
 
-  console.log(xboxProducts)
+  // console.log(xboxProducts)
   return (
     <Layout title="GameShop | Shop For Everything Xbox">
       <section className="bg-slate-100">
@@ -24,7 +24,7 @@ export default function Xbox({products}) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const res = await fetch("https://gameshop.up.railway.app/api/products/");
   const products = await res.json();
 
   return {

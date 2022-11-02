@@ -8,7 +8,7 @@ export default function Pc({products}) {
     return product.category === 'pc'
   }) 
 
-  console.log(pc_products)
+  // console.log(pc_products)
   return (
     <Layout title='GameShop | All PC & Accessories'>
       <section className="bg-slate-100">
@@ -25,7 +25,7 @@ export default function Pc({products}) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const res = await fetch("https://gameshop.up.railway.app/api/products/");
   const products = await res.json();
 
   return {

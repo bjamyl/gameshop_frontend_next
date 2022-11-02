@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Menu() {
   const { showMenu, setShowMenu } = useStateContext();
 
-  console.log(showMenu);
+  // console.log(showMenu);
   return (
     <section className="fixed w-screen h-screen top-0 left-0 bg-slate-100 p-4">
       <div className="flex flex-col justify-between h-full">
