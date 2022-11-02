@@ -16,7 +16,7 @@ export default function Search() {
                 Search results
               </h1>
               <p className="text-center xl:text-lg text-gray-700">
-                Showing results for "{searchItems}"
+                Showing results for {searchItems}
               </p>
             </div>
           ) : null}
