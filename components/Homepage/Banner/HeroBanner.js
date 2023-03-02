@@ -15,6 +15,7 @@ const fade = useSpring({from:{opacity:0},to:{opacity:1}})
                   and seize every moment on the battlefield, feel every drift
                   and celebrate every goal. Available for PS5 only"
           image="/dualsense.png"
+          page ='/products/3'
         />
       </div>
     </animated.header>

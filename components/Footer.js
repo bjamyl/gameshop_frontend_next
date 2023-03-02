@@ -39,7 +39,7 @@ export default function Footer() {
           </Link>
         </ul>
         <h1 className="text-center text-gray-500 font-semibold xl:text-lg">
-          Built By Jamil, 2022
+          Designed and Built By Jamil, 2023
         </h1>
       </div>
     </footer>
