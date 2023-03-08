@@ -65,7 +65,7 @@ export default function Featured() {
             <div className="bg-pc bg-cover bg-center w-2/4">
               <div className="p-6 bg-white h-full opacity-75 hover:h-[85%] flex flex-col justify-end items-start transition-all duration-200">
                 <h3 className="text-blue-700 text-2xl font-bold">SHOP PC</h3>
-                <p>Shop all yout favorite PC builds, accessories and games</p>
+                <p>Shop all your favorite PC builds, accessories and games</p>
                 <Link href='/pc_and_others'>
                 <button className="border-2 text-lg px-6 py-2 border-blue-700 text-blue-700">Shop Now</button>
                 </Link>
